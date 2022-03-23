@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        .a {
+            width: 500px;
+            height: 150px;
+            background: pink;
+        }
+
+        .red {
+            background: red;
+            color: aliceblue;
+        }
+
+        .a .b ul li {
+            float: left;
+            width: 25%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a">
+        <div class="b">
+            <ul>
+                <li class="red">商品</li>
+                <li>评价</li>
+                <li>反馈</li>
+                <li>售后</li>
+            </ul>
+        </div>
+        <div id="next">
+            <div class="item" style="display: block;">商品</div>
+            <div class="item">评价</div>
+            <div class="item">反馈</div>
+            <div class="item">售后</div>
+        </div>
+    </div>
+    <script>
+        var lis = document.querySelectorAll('li');
+        var items = document.querySelectorAll('.item');
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].setAttribute('index', i);
+            lis[i].onclick = function () {
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].className = '';
+                }
+                this.className = 'red';
+                var index = this.getAttribute('index');
+                for (var i = 0; i < items.length; i++) {
+                    items[i].style.display = 'none';
+                }
+                items[index].style.display = 'block';
+            }
+        }    
+    </script>
+</body>
+
+</html>
