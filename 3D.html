@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D</title>
+    <style>
+        body {
+            perspective: 500px;
+        }
+
+        img {
+            display: block;
+            margin: 100px auto;
+            width: 250px;
+            background-color: pink;
+            /* transition: 1s; */
+            animation: solo 1s infinite;
+        }
+
+        @keyframes solo {
+            0% {
+                transform: rotatex(0deg);
+            }
+
+            /* 50% {
+                transform: rotateZ(180deg);
+            } */
+
+            100% {
+                transform: rotate3d(1, 2, 3, 360deg);
+            }
+        }
+
+        /* img:hover {
+            transform: rotateZ(180deg);
+        } */
+        .a,
+        .b {
+            width: 200px;
+            height: 300px;
+            transition: .4s;
+        }
+
+        .a {
+            margin: 0 auto;
+            position: relative;
+            background: papayawhip;
+            transform-style: preserve-3d;
+        }
+        
+        .b {
+            position: absolute;
+            background: purple;
+        }
+
+        div:hover .a {
+            transform: rotateY(60deg);
+        }
+
+        div:hover .b {
+            transform: rotateX(80deg);
+        }
+    </style>
+</head>
+
+<body>
+    <img src="5.jpg" alt="">
+    <div class="c">
+        <div class="a">
+            <div class="b"></div>
+        </div>
+    </div>
+</body>
+
+</html>
