@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .box {
+            margin-top: 100px;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 720.8px;
+            height: 455px;
+            overflow: hidden;
+        }
+
+        ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 800%;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ol {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        ol li {
+            float: left;
+            margin: 0 3px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid whitesmoke;
+            cursor: pointer;
+        }
+
+        .color {
+            background: orange;
+        }
+
+        .r,
+        .l {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #cccc;
+            opacity: .5;
+            color: white;
+        }
+
+        .l {
+            left: 0;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+
+        .r {
+            right: 0;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .r:hover,
+        .l:hover {
+            opacity: .8;
+        }
+    </style>
+    <!-- <script src="animate.js"></script> -->
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li><a href="#"> <img src="focus.jpg" alt=""></a></li>
+            <li><a href="#"> <img src="focus1.jpg" alt=""></a></li>
+            <li><a href="#"> <img src="focus2.jpg" alt=""></a></li>
+            <li><a href="#"> <img src="focus3.jpg" alt=""></a></li>
+        </ul>
+        <a href="#" class="l">&lt;</a>
+        <a href="#" class="r">&gt;</a>
+        <ol>
+
+        </ol>
+    </div>
+    <script>
+        var box = document.querySelector('.box');
+        var ul = document.querySelector('ul');
+        var ol = document.querySelector('ol');
+        var l = document.querySelector('.l');
+        var r = document.querySelector('.r');
+        var Width = box.offsetWidth;
+        var firstli = ul.children[0].cloneNode(true);
+        ul.appendChild(firstli);
+
+        var num = 0;
+        var circle = 0;
+        box.addEventListener('mouseenter', function () {
+            l.style.display = 'block';
+            r.style.display = 'block';
+            clearInterval(timer);
+        });
+        box.addEventListener('mouseleave', function () {
+            l.style.display = 'none';
+            r.style.display = 'none';
+            timer = setInterval(function () {
+                r.click();
+            }, 2000);
+        });
+        // 左右点击
+        var flag = true;
+        r.addEventListener('click', function () {
+            if (flag) {
+                flag = false;
+                if (num == ol.children.length) {
+                    ul.style.left = 0;
+                    num = 0;
+                }
+                num++;
+                flag = false;
+                animate(ul, -num * Width, function () {
+                    flag = true;
+                });
+                circle++;
+                if (circle == ol.children.length) {
+                    circle = 0;
+                }
+                circleChange();
+            }
+        });
+        l.addEventListener('click', function () {
+            if (flag) {
+                flag = false;
+                if (num == 0) {
+                    num = ul.children.length - 1;
+                    ul.style.left = -num * Width + 'px';
+                }
+                num--;
+                animate(ul, - num * Width, function () {
+                    flag = true;
+                });
+                circle--;
+                if (circle < 0) {
+                    circle = ol.children.length - 1;
+                }
+                circleChange();
+            }
+        });
+        //左右点击 end
+        // 小圆点
+        for (var i = 0; i < ul.children.length - 1; i++) {
+            var lis = document.createElement('li');
+            lis.setAttribute('index', i);
+            ol.appendChild(lis);
+            ol.children[0].className = "color";
+            lis.addEventListener('click', function () {
+                for (var i = 0; i < ol.children.length; i++) {
+                    ol.children[i].className = '';
+                }
+                this.className = 'color';
+                var index = this.getAttribute('index');
+                animate(ul, -index * Width);
+                num = index;
+                circle = index;
+            });
+        }
+        // 缓动动画
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                    callback && callback();
+                }
+                obj.style.left = obj.offsetLeft + step + 'px';
+            }, 15);
+        }
+        function circleChange() {
+            for (var i = 0; i < ol.children.length; i++) {
+                ol.children[i].className = '';
+            }
+            ol.children[circle].className = 'color';
+        }
+        var timer = setInterval(function () {
+            r.click();
+        }, 2000);
+    </script>
+</body>
+
+</html>
