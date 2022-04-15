@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            background: url(f1_1.jpg) no-repeat center 0;
+            background-size: cover;
+        }
+
+        .cloud img {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+        }
+
+        .cloud img:nth-child(1) {
+            margin-left: -200px;
+            top: 20px;
+            animation: move 1.8s infinite linear alternate;
+        }
+
+        .cloud img:nth-child(2) {
+            margin-left: 200px;
+            top: 30px;
+            animation: move 1.8s infinite linear alternate .35s;
+        }
+
+        .cloud img:nth-child(3) {
+            margin-left: -500px;
+            top: 150px;
+            animation: move 1.8s infinite linear alternate .7s;
+        }
+
+        .cloud img:nth-child(4) {
+            margin-left: -350px;
+            top: 70px;
+            animation: move1 1.8s infinite linear alternate .2s;
+        }
+
+        .icon img {
+            position: absolute;
+            left: 50%;
+            bottom: 51px;
+            width: 80px;
+        }
+
+        .icon img:nth-child(1) {
+            margin-left: -400px;
+            animation: move2 1.8s infinite alternate;
+        }
+
+        .icon img:nth-child(2) {
+            margin-left: -165px;
+            animation: move2 1.8s infinite alternate .5s;
+        }
+
+        .icon img:nth-child(3) {
+            margin-left: 70px;
+            animation: move2 1.8s infinite alternate 1s;
+        }
+
+        .icon img:nth-child(4) {
+            margin-left: 305px;
+            animation: move2 1.8s infinite alternate 1.5s;
+        }
+
+        @keyframes move {
+            to {
+                transform: translateX(50px);
+            }
+        }
+
+        @keyframes move1 {
+            to {
+                transform: translateY(10px);
+            }
+        }
+
+        @keyframes move2 {
+            to {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cloud">
+        <img src="yun1.png" alt="">
+        <img src="yun2.png" alt="">
+        <img src="yun3.png" alt="">
+        <img src="san.png" alt="">
+    </div>
+    <div class="icon">
+        <img src="1.png" alt="">
+        <img src="2.png" alt="">
+        <img src="3.png" alt="">
+        <img src="4.png" alt="">
+    </div>
+</body>
+
+</html>
